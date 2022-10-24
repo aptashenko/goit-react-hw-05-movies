@@ -1,16 +1,16 @@
+import TopMenu from "./TopMenu/TopMenu";
+import { HomePage } from "./HomePage/HomePage";
+import { Route, Routes } from "react-router-dom";
+import { SearchMenu } from "./SearchMenu/SearchMenu";
+
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
-  );
-};
+    <>
+      <TopMenu />
+      <Routes>
+        <Route path="/" element={<HomePage />}></Route>
+        <Route path="/movies" element={<SearchMenu />}></Route>
+      </Routes>
+    </>
+  )
+}
