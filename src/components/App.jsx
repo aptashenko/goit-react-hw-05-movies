@@ -2,14 +2,32 @@ import TopMenu from "./TopMenu/TopMenu";
 import { HomePage } from "./HomePage/HomePage";
 import { Route, Routes } from "react-router-dom";
 import { SearchMenu } from "./SearchMenu/SearchMenu";
+import { MoviePage } from "./MoviePage/MoviePage";
+import { fetchMovies, findMovie } from "services/fetchTrendFilms";
+import { useState, useEffect } from "react";
 
 export const App = () => {
+  const [trending, setTranding] = useState([]);
+  const [movieData, setMovieData] = useState({});
+
+  useEffect(() => {
+      fetchMovies().then(setTranding);
+  }, [])
+
+
+  const selectedMovie = (data) => {
+    findMovie(data).then(setMovieData);
+  }
+
   return (
     <>
       <TopMenu />
       <Routes>
-        <Route path="/" element={<HomePage />}></Route>
-        <Route path="/movies" element={<SearchMenu />}></Route>
+        <Route path="/" element={<HomePage trending={trending} selectedMovie={selectedMovie} />}>
+        </Route>
+        <Route path="/movies" element={<SearchMenu selectedMovie={selectedMovie} />}>
+          <Route path=":movieId" element={<MoviePage movieData={movieData} />} />
+        </Route>
       </Routes>
     </>
   )

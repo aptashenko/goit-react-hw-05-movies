@@ -1,0 +1,16 @@
+.wrapper {
+    display: flex;
+    padding: 10px;
+}
+
+.poster {
+    width: 25%;
+}
+
+.movieInfo {
+    margin-left: 20px;
+}
+
+.moviePage {
+    margin-top: 20px;
+}

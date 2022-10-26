@@ -1,26 +1,24 @@
-import { useState, useEffect } from "react";
-import { fetchMovies } from "services/fetchTrendFilms";
 
+import { NavLink } from "react-router-dom";
 
-export const HomePage = () => {
-const [trending, setTranding] = useState([]);
-
-  useEffect(() => {
-      fetchMovies().then(setTranding);
-  }, [])
+export const HomePage = ({ trending, selectedMovie }) => {
+    
+    const handleMovie = (e) => {
+        selectedMovie(e)
+    }
     
     return (
-        <>
+        <div className="startPage">
             <h1>Trending Films</h1>
             <ul>
                 {trending.map(movie => (
-                    <li key={movie.id}>
-                        <a href="#">
+                    <li key={movie.id} onClick={()=>handleMovie(movie.id)}>
+                        <NavLink to={`/movies/${movie.id}`}>
                             {movie.title || movie.name}
-                        </a>
+                        </NavLink>
                     </li>
                 ))}
             </ul>
-        </>
+        </div>
     )
 }
