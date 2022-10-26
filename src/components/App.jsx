@@ -3,6 +3,7 @@ import { HomePage } from "./HomePage/HomePage";
 import { Route, Routes } from "react-router-dom";
 import { SearchMenu } from "./SearchMenu/SearchMenu";
 import { MoviePage } from "./MoviePage/MoviePage";
+import { CastPage } from "./MoviePage/CastPage";
 import { fetchMovies, findMovie } from "services/fetchTrendFilms";
 import { useState, useEffect } from "react";
 
@@ -26,7 +27,9 @@ export const App = () => {
         <Route path="/" element={<HomePage trending={trending} selectedMovie={selectedMovie} />}>
         </Route>
         <Route path="/movies" element={<SearchMenu selectedMovie={selectedMovie} />}>
-          <Route path=":movieId" element={<MoviePage movieData={movieData} />} />
+          <Route path=":movieId" element={<MoviePage movieData={movieData} />}>
+            <Route path="cast" element={<CastPage />} />
+          </Route>
         </Route>
       </Routes>
     </>

@@ -1,4 +1,4 @@
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import css from './moviePage.module.css';
 import { findMovie } from "services/fetchTrendFilms";
 import { useState, useEffect } from 'react';
@@ -37,6 +37,19 @@ export const MoviePage = () => {
                 </div>
             </div>}
             <hr />
+            <div>
+                <p>Additional information</p>
+                <ul>
+                    <li>
+                        <a href="#">Cast</a>
+                    </li>
+                    <li>
+                        <a href="#">Reviews</a>
+                    </li>
+                </ul>
+            </div>
+            <hr />
+            <Outlet />
         </div>
     )
 }
