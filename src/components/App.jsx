@@ -4,13 +4,13 @@ import { Route, Routes } from "react-router-dom";
 import { SearchMenu } from "./SearchMenu/SearchMenu";
 import { MoviePage } from "./MoviePage/MoviePage";
 import { CastPage } from "./MoviePage/CastPage";
+import { ReviewsPage } from './MoviePage/ReviewsPage';
 import { fetchMovies, findMovie } from "services/fetchTrendFilms";
 import { useState, useEffect } from "react";
 
 export const App = () => {
   const [trending, setTranding] = useState([]);
   const [movieData, setMovieData] = useState({});
-  // const [cast, setCast] = useState([]);
 
   useEffect(() => {
       fetchMovies().then(setTranding);
@@ -21,10 +21,6 @@ export const App = () => {
     findMovie(data).then(setMovieData);
   }
 
-  // const openCast = (val) => {
-  //   fetchCast(val).then(setCast);
-  // }
-
   return (
     <>
       <TopMenu />
@@ -34,6 +30,7 @@ export const App = () => {
         <Route path="/movies" element={<SearchMenu selectedMovie={selectedMovie} />}>
           <Route path=":movieId" element={<MoviePage movieData={movieData} />}>
             <Route path="cast" element={<CastPage />} />
+            <Route path="reviews" element={<ReviewsPage />} />
           </Route>
         </Route>
       </Routes>

@@ -19,6 +19,9 @@ export const searchOnWord = async (value) => {
 
 export const fetchCast = async (value) => {
     const response = await axios.get(`3/movie/${value}/credits?api_key=64b9d48df1f5249c2e8adb2dbe6fd5f9&language=en-US`);
-    console.log(response.data.cast)
     return response.data.cast
+}
+export const fetchReviews = async (value) => {
+    const response = await axios.get(`3/movie/${value}/reviews?api_key=64b9d48df1f5249c2e8adb2dbe6fd5f9&language=en-US&page=1`);
+    return response.data.results
 }

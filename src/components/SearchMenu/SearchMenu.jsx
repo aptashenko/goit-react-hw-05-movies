@@ -1,7 +1,9 @@
-import { NavLink, Outlet, useParams, useSearchParams } from 'react-router-dom'
-import css from './search.module.css'
+import { Outlet, useParams, useSearchParams } from 'react-router-dom'
+import { SearchForm } from './SearchForm';
+import { MoviesSearchList } from './MoviesSearchList';
 import { searchOnWord } from '../../services/fetchTrendFilms'
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 export const SearchMenu = ({selectedMovie}) => {
 
@@ -30,27 +32,16 @@ export const SearchMenu = ({selectedMovie}) => {
         <>
             {params.movieId
                 ? <Outlet />
-                : <form className={css.searchWrapper} onSubmit={handleInput}>
-                <label className={css.label}>
-                    <input className={css.input} type="text" name="search" placeholder="Пошук..." />
-                </label>
-                <label className={css.label}>
-                    <input type="submit" value="Search" />
-                </label>
-                </form>
+                : <SearchForm handleInput={handleInput} />
             }
-            {movies.length > 0 && !params.movieId ?
-                <ul>
-                    {movies.map(movie => (
-                        <li key={movie.id} onClick={()=>handleMovie(movie.id)}>
-                            <NavLink to={`${movie.id}`}>
-                                {movie.title || movie.name}
-                            </NavLink>
-                        </li>
-                    ))}
-                </ul>
+            {movies.length > 0 && !params.movieId
+                ? <MoviesSearchList movies={movies} handleMovie={handleMovie} />
                 : ''
             }
         </>
     )
+}
+
+SearchMenu.propTypes = {
+    selectedMovie: PropTypes.func
 }

@@ -1,53 +1,31 @@
-import { NavLink, Outlet, useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import css from './moviePage.module.css';
 import { findMovie } from "services/fetchTrendFilms";
 import { useState, useEffect } from 'react';
+import { CurrentMovie } from "./CurrentMovie";
+import { AdditionalInfo } from "./AdditionalInfo";
+import { useNavigate } from 'react-router-dom';
 
 
-export const MoviePage = ({openCast}) => {
+export const MoviePage = () => {
 
     const [currentFilm, setCurrentFilm] = useState({});
     const params = useParams();
 
+
     useEffect(() => {
         params.movieId && findMovie(params.movieId).then(setCurrentFilm);
-    },[params.movieId])
+    }, [params.movieId])
+    
+    const navigate = useNavigate();
 
     return (
         <div className={css.moviePage}>
-            <NavLink to={'/'}>Go Back</NavLink>
+            <button onClick={()=>navigate(-1)}>Go Back</button>
             <hr />
-            {currentFilm &&
-                <div className={css.wrapper}>
-                <img className={css.poster} src={currentFilm.poster_path && `https://image.tmdb.org/t/p/w500/${currentFilm.poster_path}`} alt="" />
-                <div className={css.movieInfo}>
-                    <h2>{currentFilm.name || currentFilm.title }</h2>
-                    <p>User score: {currentFilm.vote_average} %</p>
-                    <h3>Overview</h3>
-                    <p>{currentFilm.overview }</p>
-                    <h3>Genres</h3>
-                    {currentFilm.genres ? 
-                        <div>
-                            {currentFilm.genres.map(genre => (
-                            <p key={genre.id}>{ genre.name }</p>
-                            ))}
-                            </div>
-                            : ''
-                    }
-                </div>
-            </div>}
+            {currentFilm && <CurrentMovie currentFilm={currentFilm} /> }
             <hr />
-            <div>
-                <p>Additional information</p>
-                <ul>
-                    <li>
-                        <NavLink to="cast" onClick={()=>openCast(params.movieId)}>Cast</NavLink>
-                    </li>
-                    <li>
-                        <a href="#">Reviews</a>
-                    </li>
-                </ul>
-            </div>
+            <AdditionalInfo  />
             <hr />
             <Outlet />
         </div>

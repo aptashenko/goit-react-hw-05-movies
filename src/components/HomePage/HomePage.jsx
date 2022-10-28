@@ -1,5 +1,6 @@
 
 import { NavLink } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 export const HomePage = ({ trending, selectedMovie }) => {
     
@@ -21,4 +22,9 @@ export const HomePage = ({ trending, selectedMovie }) => {
             </ul>
         </div>
     )
+}
+
+HomePage.propTypes = {
+    trending: PropTypes.array,
+    selectedMovie: PropTypes.func
 }
