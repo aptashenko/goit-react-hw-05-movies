@@ -4,7 +4,7 @@ import { findMovie } from "services/fetchTrendFilms";
 import { useState, useEffect } from 'react';
 
 
-export const MoviePage = () => {
+export const MoviePage = ({openCast}) => {
 
     const [currentFilm, setCurrentFilm] = useState({});
     const params = useParams();
@@ -41,7 +41,7 @@ export const MoviePage = () => {
                 <p>Additional information</p>
                 <ul>
                     <li>
-                        <a href="#">Cast</a>
+                        <NavLink to="cast" onClick={()=>openCast(params.movieId)}>Cast</NavLink>
                     </li>
                     <li>
                         <a href="#">Reviews</a>

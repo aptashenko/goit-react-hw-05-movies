@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 export const App = () => {
   const [trending, setTranding] = useState([]);
   const [movieData, setMovieData] = useState({});
+  // const [cast, setCast] = useState([]);
 
   useEffect(() => {
       fetchMovies().then(setTranding);
@@ -19,6 +20,10 @@ export const App = () => {
   const selectedMovie = (data) => {
     findMovie(data).then(setMovieData);
   }
+
+  // const openCast = (val) => {
+  //   fetchCast(val).then(setCast);
+  // }
 
   return (
     <>
