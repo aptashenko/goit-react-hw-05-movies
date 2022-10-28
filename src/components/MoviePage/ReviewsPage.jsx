@@ -8,7 +8,7 @@ export const ReviewsPage = () => {
 
     useEffect(() => {
         fetchReviews(params.movieId).then(setCurrentReviews);
-    }, [])
+    }, [params.movieId])
     
     return (
         <div className="Reviews">

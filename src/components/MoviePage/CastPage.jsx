@@ -8,7 +8,7 @@ export const CastPage = () => {
 
     useEffect(() => {
         fetchCast(params.movieId).then(setCurrentCast);
-    }, [])
+    }, [params.movieId])
     
     return (
         <div className="Cast">
