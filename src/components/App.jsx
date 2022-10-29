@@ -5,7 +5,7 @@ import { SearchMenu } from "../pages/SearchMenu";
 import { MoviePage } from "../pages/MoviePage";
 import { CastPage } from "../pages/CastPage";
 import { ReviewsPage } from '../pages/ReviewsPage';
-import { fetchMovies, findMovie } from "services/fetchTrendFilms";
+import { fetchMovies } from "services/fetchTrendFilms";
 import { useState, useEffect } from "react";
 
 export const App = () => {
