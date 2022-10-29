@@ -1,11 +1,10 @@
 import { Outlet, useParams, useSearchParams } from 'react-router-dom'
-import { SearchForm } from './SearchForm';
-import { MoviesSearchList } from './MoviesSearchList';
-import { searchOnWord } from '../../services/fetchTrendFilms'
+import { SearchForm } from '../components/SearchMenu/SearchForm';
+import { MoviesSearchList } from '../components/SearchMenu/MoviesSearchList';
+import { searchOnWord } from '../services/fetchTrendFilms'
 import { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 
-export const SearchMenu = ({selectedMovie}) => {
+export const SearchMenu = () => {
 
     const [query, setQuery] = useSearchParams();
     const [movies, setMovies] = useState([]);
@@ -24,9 +23,8 @@ export const SearchMenu = ({selectedMovie}) => {
         searchQuery !== '' && searchOnWord(searchQuery).then(setMovies);
     },[searchQuery])
 
-    const handleMovie = (e) => {
-        selectedMovie(e)
-    }
+
+    const isVisible = movies.length > 0 && !params.movieId;
 
     return (
         <>
@@ -34,14 +32,7 @@ export const SearchMenu = ({selectedMovie}) => {
                 ? <Outlet />
                 : <SearchForm handleInput={handleInput} />
             }
-            {movies.length > 0 && !params.movieId
-                ? <MoviesSearchList movies={movies} handleMovie={handleMovie} />
-                : ''
-            }
+            {isVisible && <MoviesSearchList movies={movies} />}
         </>
     )
-}
-
-SearchMenu.propTypes = {
-    selectedMovie: PropTypes.func
 }

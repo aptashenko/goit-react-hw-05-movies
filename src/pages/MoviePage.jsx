@@ -1,9 +1,9 @@
 import { Outlet, useParams } from "react-router-dom";
-import css from './moviePage.module.css';
+import css from '../components/MoviePage/moviePage.module.css';
 import { findMovie } from "services/fetchTrendFilms";
 import { useState, useEffect } from 'react';
-import { CurrentMovie } from "./CurrentMovie";
-import { AdditionalInfo } from "./AdditionalInfo";
+import { CurrentMovie } from "../components/MoviePage/CurrentMovie";
+import { AdditionalInfo } from "../components/MoviePage/AdditionalInfo";
 import { useNavigate } from 'react-router-dom';
 
 

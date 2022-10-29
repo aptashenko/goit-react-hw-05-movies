@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types';
 
-export const MoviesSearchList = ({movies, handleMovie}) => (
+export const MoviesSearchList = ({movies}) => (
     <ul>
         {movies.map(movie => (
-            <li key={movie.id} onClick={()=>handleMovie(movie.id)}>
+            <li key={movie.id}>
                 <NavLink to={`${movie.id}`}>
                     {movie.title || movie.name}
                 </NavLink>
@@ -15,5 +15,4 @@ export const MoviesSearchList = ({movies, handleMovie}) => (
 
 MoviesSearchList.propTypes = {
     movies: PropTypes.array,
-    handleMovie: PropTypes.func,
 }
